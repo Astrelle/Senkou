@@ -38,6 +38,14 @@ float Vector3::getDotProduct(const Vector3& other) const{
     return (X*other.X) + (Y*other.Y) + (Z*other.Z);
 }
 
+Vector3 Vector3::getCrossProduct(const Vector3& other) const{
+    return Vector3(
+        (Y * other.Z) - (Z * other.Y),
+        (Z * other.X) - (X * other.Z),
+        (X * other.Y) - (Y * other.X)
+    );
+}
+
 // Returns a vector with a length of 1, a direction vector!
 Vector3 Vector3::normalize() const{
     float distance = getMagnitude();

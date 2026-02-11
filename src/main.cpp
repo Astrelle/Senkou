@@ -43,4 +43,9 @@ int main(){
         std::cout << "Succesfully perpendicular!" << std::endl;
     }
 
+    std::cout << "Testing finding the cross product!" << std::endl;
+
+    Vector3 viewCrossProduct = Vector3(1,0,0).getCrossProduct(Vector3(0,1,0));
+    viewCrossProduct.printVector();
+
 }

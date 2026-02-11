@@ -19,6 +19,8 @@ struct Vector3 {
 
     float getDotProduct(const Vector3& other) const;
 
+    Vector3 getCrossProduct(const Vector3& other) const;
+
     // create directional vector
     Vector3 normalize() const;
 
