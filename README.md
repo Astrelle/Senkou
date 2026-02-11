@@ -8,3 +8,5 @@ This project is a personal development challenge to build a functional 3D engine
 Currently, the engine features a Vector3 math library designed for 3D coordinate transformation.
 - Linear Algebra: Full support for vector operations, such as adding and subtracting or scalar multiplication and division utilizing operator overloading.
 - Normalization: Generates vectors with a length of 1 to define direction for the purpose of movement and future lightning calculations.
+- Precision Safeguards: Implementation of floating-point threshholds to prevent zero division related crashes.
+- Geometric Primitives: Dot Product ensures visibility between vectors and Cross Product generates vector of the defined perpendicular axis. 
