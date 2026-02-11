@@ -1,5 +1,5 @@
 # Senkou
-### **An [in development] custom 3D game engine built from the ground up in C++ and OpenGL. **
+### An [in development] custom 3D game engine built from the ground up in C++ and OpenGL. 
 
 This project is a personal development challenge to build a functional 3D engine, focusing on low-level optimizations, studying linear algebra, and handling real-time rendering. Many directions may be taken simply for the sake of exploration and learning.
 
