@@ -1,16 +1,17 @@
 #include "Vector3.hpp"
+#include "MathUtils.hpp"
 #include <iostream>
 #include <cmath>
 
-const float EpsilonThreshold = 0.000001f;
-
 Vector3::Vector3(float x, float y, float z) : X(x), Y(y), Z(z) {}
 
-Vector3 Vector3::operator-(const Vector3& other) const {
+// Operator functionality
+
+Vector3 Vector3::operator-(const Vector3& other) const{
     return Vector3(X - other.X, Y - other.Y, Z - other.Z);
 }
 
-Vector3 Vector3::operator+(const Vector3& other) const {
+Vector3 Vector3::operator+(const Vector3& other) const{
     return Vector3(X + other.X, Y + other.Y, Z + other.Z);
 }
 
@@ -23,15 +24,25 @@ Vector3 Vector3::operator/(float scalar) const{
 }
 
 // Length of the vector!
-float Vector3::getMagnitude(){
+float Vector3::getMagnitude() const{
     return sqrt((X*X) + (Y*Y) + (Z*Z));
 }
 
+// Performance-effective option of magnitude function for checks that don't need exact distance.
+
+float Vector3::getMagnitudeSquare() const{
+    return (X*X) + (Y*Y) + (Z*Z);
+}
+
+float Vector3::getDotProduct(const Vector3& other) const{
+    return (X*other.X) + (Y*other.Y) + (Z*other.Z);
+}
+
 // Returns a vector with a length of 1, a direction vector!
-Vector3 Vector3::normalize(){
+Vector3 Vector3::normalize() const{
     float distance = getMagnitude();
 
-    if (distance > EpsilonThreshold) {
+    if (distance > SenkouMath::EpsilonThreshold){
         return (*this) / distance;
     }
     else{
@@ -40,6 +51,6 @@ Vector3 Vector3::normalize(){
 
 }
 
-void Vector3::printVector(){
+void Vector3::printVector() const{
     std::cout << X << " " << Y << " " << Z << std::endl;
 }
