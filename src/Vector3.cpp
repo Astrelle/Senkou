@@ -23,6 +23,16 @@ Vector3 Vector3::operator/(float scalar) const{
     return Vector3(X/scalar, Y/scalar, Z/scalar);
 }
 
+bool Vector3::operator==(const Vector3& other) const{
+    return std::abs(X - other.X) < SenkouMath::EpsilonThreshold &&
+           std::abs(Y - other.Y) < SenkouMath::EpsilonThreshold &&
+           std::abs(Z - other.Z) < SenkouMath::EpsilonThreshold;
+}
+
+bool Vector3::operator!=(const Vector3& other) const{
+    return !(*this == other);
+}
+
 // Length of the vector!
 float Vector3::getMagnitude() const{
     return sqrt((X*X) + (Y*Y) + (Z*Z));
@@ -32,6 +42,14 @@ float Vector3::getMagnitude() const{
 
 float Vector3::getMagnitudeSquare() const{
     return (X*X) + (Y*Y) + (Z*Z);
+}
+
+float Vector3::getDistance(const Vector3& a, const Vector3& b){
+    return (a - b).getMagnitude();
+}
+
+float Vector3::getDistanceSquare(const Vector3& a, const Vector3& b){
+    return (a - b).getMagnitudeSquare();
 }
 
 float Vector3::getDotProduct(const Vector3& other) const{
@@ -57,6 +75,12 @@ Vector3 Vector3::normalize() const{
         return Vector3(0, 0, 0);
     }
 
+}
+
+Vector3 Vector3::lerp(const Vector3& a, const Vector3& b, float t){
+    t = SenkouMath::clamp(t, 0.0, 1.0);
+    //std::cout << t << std::endl;
+    return a + (b - a) * t;
 }
 
 void Vector3::printVector() const{

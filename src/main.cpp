@@ -48,4 +48,67 @@ int main(){
     Vector3 viewCrossProduct = Vector3(1,0,0).getCrossProduct(Vector3(0,1,0));
     viewCrossProduct.printVector();
 
+    // Vector3 playerMovement = Vector3::lerp(player, target, -.1);
+
+
+    //I'm going to be honest I'm too lazy to write these tests I'm uploading this file to Gemini and asking it to write tests for new functionality.
+    // --- New Tests: Equality and Lerp ---
+    std::cout << "\n--- Testing Equality and Lerp ---" << std::endl;
+
+    // Test 1: Epsilon Equality
+    // We create a vector that is technically different by a tiny amount
+    Vector3 vA(1.0f, 1.0f, 1.0f);
+    Vector3 vB(1.00000001f, 1.0f, 1.0f); 
+
+    if (vA == vB) {
+        std::cout << "Success: vA and vB are equal within Epsilon!" << std::endl;
+    } else {
+        std::cout << "Failure: Equality check is too strict." << std::endl;
+    }
+
+    // Test 2: Standard Lerp (50% mark)
+    Vector3 start(0, 0, 0);
+    Vector3 end(10, 10, 10);
+    Vector3 mid = Vector3::lerp(start, end, 0.5f);
+
+    std::cout << "Lerp 50% (Expected 5 5 5): ";
+    mid.printVector();
+
+    // Test 3: Clamped Lerp (Overshoot)
+    // t = 2.0 should be clamped to 1.0 (returning the 'end' vector)
+    Vector3 overshoot = Vector3::lerp(start, end, 2.0f);
+    
+    if (overshoot == end) {
+        std::cout << "Success: Lerp correctly clamped 2.0 to 1.0!" << std::endl;
+    } else {
+        std::cout << "Failure: Lerp overshoot was not clamped." << std::endl;
+    }
+
+    // --- Testing Distance Functions ---
+    std::cout << "\n--- Testing Distance ---" << std::endl;
+
+    // A 3-4-5 triangle scenario:
+    // Point A at (0, 0, 0)
+    // Point B at (3, 4, 0)
+    // The distance should be exactly 5.0
+    Vector3 pointA(0, 0, 0);
+    Vector3 pointB(3, 4, 0);
+
+    float dist = Vector3::getDistance(pointA, pointB);
+    float distSq = Vector3::getDistanceSquare(pointA, pointB);
+
+    std::cout << "Distance between (0,0,0) and (3,4,0): " << dist << std::endl;
+    std::cout << "Distance Square: " << distSq << std::endl;
+
+    // Verification logic using your Epsilon
+    if (std::abs(dist - 5.0f) < SenkouMath::EpsilonThreshold) {
+        std::cout << "Success: Distance is correctly calculated as 5!" << std::endl;
+    }
+
+    if (std::abs(distSq - 25.0f) < SenkouMath::EpsilonThreshold) {
+        std::cout << "Success: Distance Square is correctly calculated as 25!" << std::endl;
+    }
+
+
+
 }
