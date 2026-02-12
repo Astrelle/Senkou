@@ -10,3 +10,4 @@ Currently, the engine features a Vector3 math library designed for 3D coordinate
 - Normalization: Generates vectors with a length of 1 to define direction for the purpose of movement and future lightning calculations.
 - Precision Safeguards: Implementation of floating-point threshholds to prevent zero division related crashes.
 - Geometric Primitives: Dot Product ensures visibility between vectors and Cross Product generates vector of the defined perpendicular axis. 
+- Linear Interpolation: Supports smooth transitions between points with reimplementation of clamping to guard overshooting.
