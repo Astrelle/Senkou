@@ -1,5 +1,6 @@
 #include "Vector3.hpp"
 #include "MathUtils.hpp"
+#include "Matrix4.hpp"
 #include <iostream>
 
 int main(){
@@ -109,6 +110,33 @@ int main(){
         std::cout << "Success: Distance Square is correctly calculated as 25!" << std::endl;
     }
 
+    // --- testing Matrix4 baseline ---
+    Matrix4 matrix;
+    matrix.printMatrix();
 
+    // --- test Matrix-Vector Multiplication ---
+    Vector3 point(1.0f, 2.0f, 3.0f);
+
+    Vector3 identityResult = matrix.multiplyVector(point);
+    std::cout << "Identity Test (Expected 1 2 3): ";
+    identityResult.printVector();
+
+    if (identityResult == point) {
+        std::cout << "Success: Identity matrix left vector unchanged." << std::endl;
+    } else{
+        std::cout << "Failure: Identity amtrix alterted vector coordinates." << std::endl;
+    }
+
+    Matrix4 translationMatrix;
+
+    translationMatrix.M[3] = 5.0f; //X +5
+    translationMatrix.M[7] = -3.0f; //Y -3
+    translationMatrix.M[11] = 10.0f; //Z +10
+
+    std::cout << "\nTranslation Matrix:";
+    translationMatrix.printMatrix();
+
+    Vector3 translatedResult = translationMatrix.multiplyVector(point); //(1+5[6], 2-3[-1], 3+10[13]) 6, -1, 13 expected
+    translatedResult.printVector();
 
 }
