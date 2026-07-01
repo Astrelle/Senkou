@@ -139,4 +139,33 @@ int main(){
     Vector3 translatedResult = translationMatrix.multiplyVector(point); //(1+5[6], 2-3[-1], 3+10[13]) 6, -1, 13 expected
     translatedResult.printVector();
 
+    std::cout << "\n--- Testing Matrix x Matrix Multiplication ---" << std::endl;
+    Matrix4 identityMatrix;
+    Matrix4 testMatrix = translationMatrix;
+
+    Matrix4 multipliedResult = identityMatrix * testMatrix;
+
+    std::cout << "Result of Identity x Translation: \n";
+    multipliedResult.printMatrix();
+
+    // --- Test: Comprehensive 3D Compound Transformations ---
+    std::cout << "\n=== RUNNING COMPLETE SENKOU 3D MATH CORE TEST ===" << std::endl;
+
+    // 1. Generate our individual transformation matrices using our new static generators
+    Matrix4 scaleMat     = Matrix4::makeScale(2.5f, 0.5f, 1.0f);
+    Matrix4 rotateXMat   = Matrix4::makeRotationX(0.523599f); // 30 degrees in radians
+    Matrix4 rotateYMat   = Matrix4::makeRotationY(0.785398f); // 45 degrees in radians
+    Matrix4 rotateZMat   = Matrix4::makeRotationZ(1.570796f); // 90 degrees in radians
+    Matrix4 translateMat = Matrix4::makeTranslation(10.0f, -5.0f, 25.0f);
+
+    // 2. Combine all three rotations together into one single orientation matrix (Order: X * Y * Z)
+    Matrix4 totalRotation = rotateXMat * rotateYMat * rotateZMat;
+
+    // 3. Build the final Model Matrix (Order: Translate * Rotate * Scale)
+    // This compresses 5 separate matrix transformations into one 64-byte payload for the GPU!
+    Matrix4 finalModelMatrix = translateMat * totalRotation * scaleMat;
+
+    std::cout << "\n[SUCCESS] Final 3D Model Matrix Generated Successfully:\n";
+    finalModelMatrix.printMatrix();
+
 }
